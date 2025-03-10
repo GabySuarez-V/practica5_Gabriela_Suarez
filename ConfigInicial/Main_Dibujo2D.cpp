@@ -55,40 +55,26 @@ int main() {
 	// Define las dimensiones del viewport
 	//glViewport(0, 0, screenWidth, screenHeight);
 
-    Shader ourShader("Shader/core.vs", "Shader/core.frag"); //carga la informacion por separado
-
+    Shader ourShader("Shader/core.vs", "Shader/core.frag"); // se carga la info de los archivos por separado 
+	// vs= vertices y fragmentos=frag
 	// Set up vertex data (and buffer(s)) and attribute pointers
 	float vertices[] = {
-		/*0.5f,  0.0f, 0.0f,   1.0f, 0.0f, 0.0f, // top right   //1.0f,0.0f,0.0f, son el color de los vertices
-		0.35f,  0.35f, 0.0f, 1.0f, 0.5f, 0.0f,  // bottom right
-		0.0f,  0.5f, 0.0f,   0.0f, 1.0f, 0.0f,  // bottom left
-		-0.35f,  0.35f, 0.0f, 0.0f, 1.0f, 0.5f, // top left
-		//los que yo pegue
-		-0.5f,  0.0f, 0.0f,   0.0f, 0.0f, 1.0f,
-		-0.35f, -0.35f, 0.0f, 0.5f, 0.0f, 1.0f,
-		 0.0f, -0.5f, 0.0f,   1.0f, 0.0f, 1.0f,
-		0.35f, -0.35f, 0.0f, 1.0f, 1.0f, 0.0f*/
-		//haciendo las orejitas
-  0.0f,  0.3f, 0.0f,   0.8f, 0.6f, 0.3f,  // parte superior central
-	0.2f,  0.2f, 0.0f,   0.8f, 0.6f, 0.3f,  // derecho superior
-	0.3f,  0.0f, 0.0f,   0.8f, 0.6f, 0.3f,  // derecho medio
-	0.2f, -0.2f, 0.0f,   0.8f, 0.6f, 0.3f,  // derecho inferior
-	0.0f, -0.3f, 0.0f,   0.8f, 0.6f, 0.3f,  // parte inferior central
-	-0.2f, -0.2f, 0.0f,   0.8f, 0.6f, 0.3f,  // izquierdo inferior
-	-0.3f,  0.0f, 0.0f,   0.8f, 0.6f, 0.3f,  // izquierdo medio
-	-0.2f,  0.2f, 0.0f,   0.8f, 0.6f, 0.3f,  // izquierdo superior
+		0.2f,  0.6f, 0.0f,    1.0f,0.0f,0.0f, 
+		-0.2f,  0.6f, 0.0f,   1.0f,0.0f,0.0f,
+		-0.4f, 0.3f, 0.0f,   1.0f,0.0f,0.0f,
+		0.0f, 0.0f, 0.0f,    1.0f,0.0f,0.0f,
+		0.4f, 0.3f, 0.0f,   1.0f,0.0f,0.0f,// top right cambiar la posición de -1 a 1 
+		
+		// triangulo izquierdo 
+		-0.2f,  0.6f, 0.0f,   1.0f,0.0f,0.0f,
+		-0.4f, 0.3f, 0.0f,   1.0f,0.0f,0.0f,
+		-0.3f, 0.9f, 0.0f,   1.0f,0.0f,0.0f,
 
-	// Oreja izquierda (triángulo)
-	-0.2f,  0.3f, 0.0f,   0.5f, 0.3f, 0.1f,  
-	-0.4f,  0.6f, 0.0f,   0.5f, 0.3f, 0.1f,  
-	-0.1f,  0.7f, 0.0f,   0.5f, 0.3f, 0.1f,  
-
-	// Oreja derecha (triángulo)
-	0.2f,  0.3f, 0.0f,   0.5f, 0.3f, 0.1f,  
-	0.4f,  0.6f, 0.0f,   0.5f, 0.3f, 0.1f,  
-	0.1f,  0.7f, 0.0f,   0.5f, 0.3f, 0.1f,  
+		//triangulo derecho 
+		 0.2f,  0.6f, 0.0f,    1.0f,0.0f,0.0f,
+		0.4f, 0.3f, 0.0f,   1.0f,0.0f,0.0f,
+		0.3f, 0.9f, 0.0f,   1.0f,0.0f,0.0f
 	};
-
 	unsigned int indices[] = {  // note that we start from 0!
 		3,2,1,// second Triangle
 		0,1,3,
@@ -145,18 +131,19 @@ int main() {
         glBindVertexArray(VAO);
 
 
-        glPointSize(10);
-        glDrawArrays(GL_POINTS,0,8);
+        glPointSize(10); //tamaño der vertice 
+        //glDrawArrays(GL_POINTS,0,5); //función de puntos 
+		//glDrawArrays(GL_POINTS,1,1);
         
-        //glDrawArrays(GL_LINES,1,2);
-        glDrawArrays(GL_LINE_LOOP,0,8); //cuadrado completo
+        //glDrawArrays(GL_LINES,0,5); //lineas 
+        glDrawArrays(GL_LINE_LOOP,0,5); // cerrar los vertices
         
-       // glDrawArrays(GL_TRIANGLES,0,3);
-        //glDrawElements(GL_TRIANGLES, 3,GL_UNSIGNED_INT,0);
+        glDrawArrays(GL_TRIANGLES,5,3); //dibujar triangulos 
+		glDrawArrays(GL_TRIANGLES, 8, 3); //dibujar triangulos 
+        //glDrawElements(GL_TRIANGLES, 3,GL_UNSIGNED_INT,0); //dibuja los elementos de arreglo 
+		// por medio de los indices       elementos no signados de tipo entero 
 
-		//LO QUE AGREGUE PARA LAS OREJAS
-		glDrawArrays(GL_TRIANGLES, 8, 3);
-		glDrawArrays(GL_TRIANGLES, 11, 3);
+        
         
         glBindVertexArray(0);
     
